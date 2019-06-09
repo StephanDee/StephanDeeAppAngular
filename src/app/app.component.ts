@@ -1,5 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductManagerService } from './managers/product-manager.service';
 
+/**
+ * The AppComponent the root component of the app.
+ *
+ * @Author: Stephan Dünkel 
+ * @Date: 2019-06-09 23:53:07 
+ * @Last Modified by: Stephan Dünkel
+ * @Last Modified time: 2019-06-10 00:55:52
+ */
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,7 +18,12 @@ export class AppComponent implements OnInit {
   public title = 'StephanDeeApp';
   public products = [];
 
-  constructor() {
+  /**
+   * The constructor of AppComponent.
+   *
+   * @param productManagerService This service handles all operations and methods for products.
+   */
+  constructor(public productManagerService: ProductManagerService) {
   }
 
   public ngOnInit(): void {
@@ -20,10 +34,13 @@ export class AppComponent implements OnInit {
       productArray = Object.keys(productsJson).map((key) => productsJson[key]);
       this.products = productArray[0];
     });
+
+    // this.productManagerService.getProducts();
   }
 
-  public createProduct() {
+  public createProduct(product) {
     // post Product
+    // this.productManagerService.createProduct(product);
     alert("created");
   }
 }

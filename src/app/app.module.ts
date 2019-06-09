@@ -27,6 +27,14 @@ import { MatButtonModule } from '@angular/material/button';
 
 // import { environment } from '../environments/environment';
 
+/**
+ * The AppModule the root module of the app.
+ *
+ * @Author: Stephan Dünkel 
+ * @Date: 2019-06-10 00:15:37 
+ * @Last Modified by: Stephan Dünkel
+ * @Last Modified time: 2019-06-10 00:16:32
+ */
 @NgModule({
   declarations: [
     AppComponent

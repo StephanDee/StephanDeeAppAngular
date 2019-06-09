@@ -1,17 +1,16 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
+<div class="text_center">
   <h2>Products</h2>
 </div>
 <mat-list *ngFor="let product of products;">
   <mat-card>
     <p>{{ product.name }}</p>
-    <div style="text-align:center">
+    <div class="text_center">
       <p>{{ product.description }}</p>
       <p>{{ product.price }}</p>
     </div>
   </mat-card>
 </mat-list>
 <br>
-<div style="float: right">
+<div class="element_right">
   <button mat-raised-button color="primary" (click)="createProduct()">Create Product</button>
 </div>
