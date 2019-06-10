@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -24,6 +25,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { ProductManagerService } from './managers/product-manager.service';
+import { ProductAccessService } from './dbaccess/product-access.service';
 
 // import { environment } from '../environments/environment';
 
@@ -45,6 +48,7 @@ import { MatButtonModule } from '@angular/material/button';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    FormsModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
     MatCheckboxModule,
@@ -62,7 +66,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatCardModule,
     MatButtonModule
   ],
-  providers: [],
+  providers: [ProductManagerService, ProductAccessService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

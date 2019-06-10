@@ -8,18 +8,20 @@
  */
 export class Product {
 
+    // the released/modified date
+    public readonly date: Date;
+
     /**
      * The constructor of the product model.
+     *
      * @param name The product name
-     * @param description The product description
      * @param price the product price
-     * @param date the released/modified date
+     * @param description The product description, optional parameter
      */
     constructor(
         public name: string,
-        public description: string,
         public price: number,
-        public date: Date) {
+        public description?: string) {
         this.name = name;
         this.price = price;
     }

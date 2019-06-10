@@ -2,6 +2,7 @@
 
 # custom
 package-lock.json
+.vscode
 
 # compiled output
 /dist

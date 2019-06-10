@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductManagerService } from './managers/product-manager.service';
+import { Product } from './models/product';
+import { Subscription } from 'rxjs';
 
 /**
  * The AppComponent the root component of the app.
@@ -12,11 +14,14 @@ import { ProductManagerService } from './managers/product-manager.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  providers: [ProductManagerService]
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
+  private getProductsSubscription: Subscription;
+
   public title = 'StephanDeeApp';
-  public products = [];
+  public products: Product[] = [];
 
   /**
    * The constructor of AppComponent.
@@ -26,21 +31,41 @@ export class AppComponent implements OnInit {
   constructor(public productManagerService: ProductManagerService) {
   }
 
+  /**
+   * Initialize the AppComponent.
+   */
   public ngOnInit(): void {
-    fetch('http://localhost:3000/products').then((products) => {
-      return products.json();
-    }).then((productsJson) => {
-      let productArray = [];
-      productArray = Object.keys(productsJson).map((key) => productsJson[key]);
-      this.products = productArray[0];
+    this.getProductsSubscription = this.productManagerService.getProducts().subscribe((productData: Product[]) => {
+      this.products = Object.keys(productData).map((key) => productData[key])[0];
     });
-
-    // this.productManagerService.getProducts();
   }
 
-  public createProduct(product) {
-    // post Product
-    // this.productManagerService.createProduct(product);
-    alert("created");
+  /**
+   * When the AppComponent is left.
+   */
+  public ngOnDestroy(): void {
+    // unsubscribe Subscriptions
+    this.getProductsSubscription.unsubscribe();
+  }
+
+  /**
+   * Adds a new product.
+   * 
+   * @param name the name of the product
+   * @param price the price of the product
+   * @param description the description of the product, optional paramenter
+   */
+  public addProduct(name: string, price: number, description?: string) {
+    let product = new Product(
+      name,
+      price
+    );
+
+    // optional parameter
+    if (description !== undefined) {
+      product.description = description;
+    }
+
+    this.productManagerService.createProduct(product);
   }
 }

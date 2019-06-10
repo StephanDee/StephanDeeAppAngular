@@ -1,7 +1,41 @@
+mat-card {
+    // background: #FF512F;  /* fallback for old browsers */
+    // background: -webkit-linear-gradient(to right, #DD2476, #FF512F);  /* Chrome 10-25, Safari 5.1-6 */
+    // background: linear-gradient(to right, rgb(209, 182, 195), rgb(245, 234, 197)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    // background: #FFEEEE;  /* fallback for old browsers */
+    
+    // background: #EFEFBB;  /* fallback for old browsers */
+    // background: -webkit-linear-gradient(to right, #D4D3DD, #EFEFBB);  /* Chrome 10-25, Safari 5.1-6 */
+    // background: linear-gradient(to right, #D4D3DD, #EFEFBB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    // background: #ddd6f3;  /* fallback for old browsers */
+    // background: -webkit-linear-gradient(to right, #faaca8, #ddd6f3);  /* Chrome 10-25, Safari 5.1-6 */
+    // background: linear-gradient(to right, #faaca8, #ddd6f3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.spacer_1 {
+    margin: 8px;
+}
+
 .text_center {
     text-align: center;
 }
 
-.element_right {
-    float: right;
+.text_white {
+    color: #ffffff;
+}
+
+.element_center {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.form_width {
+    max-width: 500px;
+    width: 100%;
+}
+  
+.full_width {
+    width: 100%;
 }

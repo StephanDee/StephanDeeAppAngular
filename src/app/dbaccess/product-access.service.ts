@@ -1,6 +1,8 @@
-import { HttpClient } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { Product } from '../models/product';
+import { Injectable } from '@angular/core';
+import { JsonPipe } from '@angular/common';
 
 /**
  * The ProductAccessService is the REST API connection to the StephanDeeCloud with all the CRUD Operations.
@@ -10,30 +12,41 @@ import { Product } from '../models/product';
  * @Last Modified by: Stephan Dünkel
  * @Last Modified time: 2019-06-10 00:50:15
  */
+@Injectable()
 export class ProductAccessService {
-    public apiUrl = "http://localhost:3000";
-    public routeProducts = "/products";
+    private apiUrl = "http://localhost:3000";
+    private routeProducts = "/products";
 
     /**
      * The constructor of ProductAccessService.
      *
      * @param http The http client.
      */
-    constructor(public http: HttpClient) {
+    constructor(private http: HttpClient) {
     }
 
     /**
-     * Get all Products.
+     * Get all products.
      */
-    public getProducts(): Observable<Product> {
-        let products: Observable<Object> = undefined;
+    public getProducts(): Observable<Product[]> {
         try {
-            products = this.http.get(`${this.apiUrl}${this.routeProducts}`);
+            return this.http.get<Product[]>(`${this.apiUrl}${this.routeProducts}`);
         } catch (error) {
             console.log(error);
         }
+    }
 
-        return;
+    /**
+     * Get a specific product.
+     *
+     * @param id the product ID
+     */
+    public getProduct(id: string): Observable<Product> {
+        try {
+            return this.http.get<Product>(`${this.apiUrl}${this.routeProducts}/${id}`);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     /**
@@ -41,11 +54,28 @@ export class ProductAccessService {
      *
      * @param product the product
      */
-    public createProduct(product: Product): void {
+    public async createProduct(product: Product): Promise<Product> {
         try {
-            this.http.post(`${this.apiUrl}${this.routeProducts}`, product);
+            let headers = new HttpHeaders();
+            headers.append('Content-Type', 'application/json');
+            headers.append('Accept', 'application/json');
+
+            return await this.http.post<Product>(
+                `${this.apiUrl}${this.routeProducts}`,
+                product,
+                { headers: headers }
+            ).toPromise();
         } catch (error) {
             console.log(error);
         }
+    }
+
+    /**
+     * Removes a specific Product by ID
+     *
+     * @param id the product ID
+     */
+    public async removeProduct(id: string): Promise<void> {
+        await this.http.delete<Product>(`${this.apiUrl}${this.routeProducts}`);
     }
 }
