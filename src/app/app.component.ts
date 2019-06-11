@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { ProductManagerService } from './managers/product-manager.service';
 import { Product } from './models/product';
 import { Subscription } from 'rxjs';
+import { FormControl, FormControlName, NgModel } from '@angular/forms';
 
 /**
  * The AppComponent the root component of the app.
@@ -18,9 +19,11 @@ import { Subscription } from 'rxjs';
   providers: [ProductManagerService]
 })
 export class AppComponent implements OnInit, OnDestroy {
-  private getProductsSubscription: Subscription;
+  @ViewChild('name', { static: false }) name: NgModel;
+  @ViewChild('description', { static: false }) description: NgModel;
+  @ViewChild('price', { static: false }) price: NgModel;
 
-  public title = 'StephanDeeApp';
+  private getProductsSubscription: Subscription;
   public products: Product[] = [];
 
   /**
@@ -36,7 +39,7 @@ export class AppComponent implements OnInit, OnDestroy {
    */
   public ngOnInit(): void {
     this.getProductsSubscription = this.productManagerService.getProducts().subscribe((productData: Product[]) => {
-      this.products = Object.keys(productData).map((key) => productData[key])[0];
+      this.products = productData;
     });
   }
 
@@ -55,7 +58,7 @@ export class AppComponent implements OnInit, OnDestroy {
    * @param price the price of the product
    * @param description the description of the product, optional paramenter
    */
-  public addProduct(name: string, price: number, description?: string) {
+  public async addProduct(name: string, price: number, description?: string): Promise<void> {
     let product = new Product(
       name,
       price
@@ -66,6 +69,12 @@ export class AppComponent implements OnInit, OnDestroy {
       product.description = description;
     }
 
-    this.productManagerService.createProduct(product);
+    const newProduct: Product = await this.productManagerService.createProduct(product);
+    this.products.push(newProduct);
+
+    // resets the inputs
+    this.name.reset('');
+    this.description.reset('');
+    this.price.reset('');
   }
 }

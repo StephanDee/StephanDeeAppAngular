@@ -41,8 +41,8 @@ export class ProductManagerService {
      *
      * @param product the product
      */
-    public async createProduct(product: Product): Promise<void> {
-        await this.productAccessService.createProduct(product);
+    public async createProduct(product: Product): Promise<Product> {
+        return await this.productAccessService.createProduct(product);
     }
 
     /**
