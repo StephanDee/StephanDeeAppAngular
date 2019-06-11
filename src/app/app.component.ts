@@ -59,22 +59,27 @@ export class AppComponent implements OnInit, OnDestroy {
    * @param description the description of the product, optional paramenter
    */
   public async addProduct(name: string, price: number, description?: string): Promise<void> {
-    let product = new Product(
-      name,
-      price
-    );
+    if (name && name !== '' && name !== null && price && price !== null) {
+      console.log(price);
+      let product = new Product(
+        name,
+        price
+      );
 
-    // optional parameter
-    if (description !== undefined) {
-      product.description = description;
+      // optional parameter
+      if (description !== undefined) {
+        product.description = description;
+      }
+
+      const newProduct: Product = await this.productManagerService.createProduct(product);
+      this.products.push(newProduct);
+
+      // resets the inputs
+      this.name.reset('');
+      this.description.reset('');
+      this.price.reset('');
+    } else {
+      alert('Bitte füllen Sie alle mit dem * gekennzeichneten Felder aus.');
     }
-
-    const newProduct: Product = await this.productManagerService.createProduct(product);
-    this.products.push(newProduct);
-
-    // resets the inputs
-    this.name.reset('');
-    this.description.reset('');
-    this.price.reset('');
   }
 }

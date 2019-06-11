@@ -6,18 +6,19 @@
   <mat-card class="form_width spacer_1">
     <form>
       <mat-form-field class="full_width">
-        <input matInput type="text" name="name" ngModel #name="ngModel" placeholder="Name" maxLength="30">
+        <input matInput type="text" name="name" required ngModel #name="ngModel" placeholder="Name" maxLength="30">
       </mat-form-field>
       <mat-form-field class="full_width">
         <input matInput type="text" name="description" ngModel #description="ngModel" placeholder="Beschreibung"
           maxLength="255">
       </mat-form-field>
       <mat-form-field class="full_width">
-        <input matInput type="number" name="price" ngModel #price="ngModel" placeholder="Preis" maxLength="10">
+        <input matInput type="number" name="price" required ngModel #price="ngModel" placeholder="Preis" maxLength="10">
       </mat-form-field>
     </form>
 
-    <button mat-raised-button color="primary" (click)="addProduct(name.value, price.value, description.value)">Produkt hinzufügen</button>
+    <button mat-raised-button color="primary" (click)="addProduct(name.value, price.value, description.value)">
+      Produkt hinzufügen</button>
   </mat-card>
 
   <br><br>
