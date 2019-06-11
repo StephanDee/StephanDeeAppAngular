@@ -9,25 +9,33 @@
         <input matInput type="text" name="name" required ngModel #name="ngModel" placeholder="Name" maxLength="30">
       </mat-form-field>
       <mat-form-field class="full_width">
-        <input matInput type="text" name="description" ngModel #description="ngModel" placeholder="Beschreibung"
-          maxLength="255">
+        <textarea matInput type="text" name="description" ngModel #description="ngModel" placeholder="Beschreibung"
+          maxLength="255" rows="8"></textarea>
       </mat-form-field>
       <mat-form-field class="full_width">
         <input matInput type="number" name="price" required ngModel #price="ngModel" placeholder="Preis" maxLength="10">
       </mat-form-field>
     </form>
 
-    <button mat-raised-button color="primary" (click)="addProduct(name.value, price.value, description.value)">
-      Produkt hinzufügen</button>
+    <div class="content_flex_end">
+      <button mat-raised-button color="primary" (click)="addProduct(name.value, price.value, description.value)">
+        Produkt hinzufügen</button>
+    </div>
   </mat-card>
 
   <br><br>
   <mat-list *ngFor="let product of products;">
     <mat-card class="form_width spacer_1">
-      <p>{{ product.name }}</p>
-      <div class="text_center">
-        <p>{{ product.description }}</p>
-        <p>{{ product.price }} €</p>
+      <div class="content_space_between">
+        <p>{{ product.name }}</p>
+        <button mat-mini-fab color="accent" aria-label="icon-button clear" (click)="deleteProduct(product._id)">
+          <mat-icon>clear</mat-icon>
+        </button>
+      </div>
+      <h4>Beschreibung</h4>
+      <p>{{ product.description }}</p>
+      <div class="content_flex_end">
+        <p>Preis {{ product.price }} €</p>
       </div>
     </mat-card>
   </mat-list>

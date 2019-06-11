@@ -2,15 +2,15 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/co
 import { ProductManagerService } from './managers/product-manager.service';
 import { Product } from './models/product';
 import { Subscription } from 'rxjs';
-import { FormControl, FormControlName, NgModel } from '@angular/forms';
+import { FormControl, NgModel } from '@angular/forms';
 
 /**
  * The AppComponent the root component of the app.
  *
  * @Author: Stephan Dünkel 
- * @Date: 2019-06-09 23:53:07 
+ * @Date: 2019-06-11 13:52:51 
  * @Last Modified by: Stephan Dünkel
- * @Last Modified time: 2019-06-10 00:55:52
+ * @Last Modified time: 2019-06-11 14:09:19
  */
 @Component({
   selector: 'app-root',
@@ -60,7 +60,6 @@ export class AppComponent implements OnInit, OnDestroy {
    */
   public async addProduct(name: string, price: number, description?: string): Promise<void> {
     if (name && name !== '' && name !== null && price && price !== null) {
-      console.log(price);
       let product = new Product(
         name,
         price
@@ -80,6 +79,21 @@ export class AppComponent implements OnInit, OnDestroy {
       this.price.reset('');
     } else {
       alert('Bitte füllen Sie alle mit dem * gekennzeichneten Felder aus.');
+    }
+  }
+
+  /**
+   * Delete Product.
+   *
+   * @param id the product ID
+   */
+  public async deleteProduct(id: string): Promise<void> {
+    await this.productManagerService.removeProduct(id);
+
+    // remove product from List
+    const index = this.products.findIndex((product) => product._id === id);
+    if (index !== -1) {
+      this.products.splice(index, 1);
     }
   }
 }

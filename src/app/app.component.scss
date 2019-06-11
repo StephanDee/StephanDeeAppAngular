@@ -39,3 +39,13 @@ mat-card {
 .full_width {
     width: 100%;
 }
+
+.content_space_between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.content_flex_end {
+    display: flex;
+    justify-content: flex-end;
+}

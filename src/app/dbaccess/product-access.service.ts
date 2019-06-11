@@ -2,15 +2,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { Product } from '../models/product';
 import { Injectable } from '@angular/core';
-import { JsonPipe } from '@angular/common';
 
 /**
  * The ProductAccessService is the REST API connection to the StephanDeeCloud with all the CRUD Operations.
  *
  * @Author: Stephan Dünkel 
- * @Date: 2019-06-09 23:52:36 
- * @Last Modified by: Stephan Dünkel
- * @Last Modified time: 2019-06-10 00:50:15
+ * @Date: 2019-06-11 13:53:35 
+ * @Last Modified by:   Stephan Dünkel 
+ * @Last Modified time: 2019-06-11 13:53:35
  */
 @Injectable()
 export class ProductAccessService {
@@ -76,6 +75,6 @@ export class ProductAccessService {
      * @param id the product ID
      */
     public async removeProduct(id: string): Promise<void> {
-        await this.http.delete<Product>(`${this.apiUrl}${this.routeProducts}`);
+        await this.http.delete<Product>(`${this.apiUrl}${this.routeProducts}/${id}`).toPromise();
     }
 }

@@ -7,9 +7,9 @@ import { Injectable } from '@angular/core';
  * The ProductManagerService handles all CRUD Operations and Methods for Products.
  *
  * @Author: Stephan Dünkel 
- * @Date: 2019-06-09 23:52:44 
+ * @Date: 2019-06-11 13:53:53 
  * @Last Modified by: Stephan Dünkel
- * @Last Modified time: 2019-06-10 00:54:22
+ * @Last Modified time: 2019-06-11 13:56:02
  */
 @Injectable()
 export class ProductManagerService {

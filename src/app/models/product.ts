@@ -2,12 +2,14 @@
  * The product model.
  *
  * @Author: Stephan Dünkel 
- * @Date: 2019-06-09 23:52:56 
+ * @Date: 2019-06-11 13:53:53 
  * @Last Modified by: Stephan Dünkel
- * @Last Modified time: 2019-06-10 00:20:56
+ * @Last Modified time: 2019-06-11 13:56:02
  */
 export class Product {
 
+    // the product ID
+    public readonly _id: string;
     // the released/modified date
     public readonly date: Date;
 
