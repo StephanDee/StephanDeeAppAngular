@@ -10,7 +10,7 @@ import { FormControl, NgModel } from '@angular/forms';
  * @Author: Stephan Dünkel 
  * @Date: 2019-06-11 13:52:51 
  * @Last Modified by: Stephan Dünkel
- * @Last Modified time: 2019-06-11 14:09:19
+ * @Last Modified time: 2019-06-11 14:18:52
  */
 @Component({
   selector: 'app-root',

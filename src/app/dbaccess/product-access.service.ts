@@ -8,8 +8,8 @@ import { Injectable } from '@angular/core';
  *
  * @Author: Stephan Dünkel 
  * @Date: 2019-06-11 13:53:35 
- * @Last Modified by:   Stephan Dünkel 
- * @Last Modified time: 2019-06-11 13:53:35
+ * @Last Modified by: Stephan Dünkel
+ * @Last Modified time: 2019-06-11 14:18:35
  */
 @Injectable()
 export class ProductAccessService {
@@ -75,6 +75,10 @@ export class ProductAccessService {
      * @param id the product ID
      */
     public async removeProduct(id: string): Promise<void> {
-        await this.http.delete<Product>(`${this.apiUrl}${this.routeProducts}/${id}`).toPromise();
+        try {
+            await this.http.delete<Product>(`${this.apiUrl}${this.routeProducts}/${id}`).toPromise();
+        } catch (error) {
+            console.log(error);
+        }
     }
 }
