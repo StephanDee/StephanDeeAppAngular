@@ -4,21 +4,39 @@
 
 <div class="element_center">
   <mat-card class="form_width spacer_1">
-    <form>
+    <form [formGroup]="productForm">
       <mat-form-field class="full_width">
-        <input matInput type="text" name="name" required ngModel #name="ngModel" placeholder="Name" maxLength="30">
+        <input matInput type="text" name="name" placeholder="Name" maxLength="30" formControlName="name">
+        <button *ngIf="productForm.get('name').value" mat-button matSuffix mat-icon-button aria-label="Clear"
+          (click)="productForm.get('name').setValue('')">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-hint align="end">{{ productForm.get('name').value?.length }} / 30</mat-hint>
+        <mat-error *ngIf="productForm.get('name').hasError('required')">Sie müssen einen Namen eingeben.</mat-error>
       </mat-form-field>
       <mat-form-field class="full_width">
-        <textarea matInput type="text" name="description" ngModel #description="ngModel" placeholder="Beschreibung"
-          maxLength="255" rows="8"></textarea>
+        <button *ngIf="productForm.get('description').value" mat-button matSuffix mat-icon-button aria-label="Clear"
+          (click)="productForm.get('description').setValue('')">
+          <mat-icon>close</mat-icon>
+        </button>
+        <textarea matInput type="text" name="description" placeholder="Beschreibung" maxLength="255" rows="8"
+          formControlName="description"></textarea>
+        <mat-hint align="end">{{ productForm.get('description').value?.length }} / 255</mat-hint>
       </mat-form-field>
       <mat-form-field class="full_width">
-        <input matInput type="number" name="price" required ngModel #price="ngModel" placeholder="Preis" maxLength="10">
+        <input matInput type="number" name="price" placeholder="Preis" maxLength="10" formControlName="price">
+        <button *ngIf="productForm.get('price').value" mat-button matSuffix mat-icon-button aria-label="Clear"
+          (click)="productForm.get('price').setValue('')">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-hint align="end">{{ productForm.get('price').value?.length }} / 10</mat-hint>
+        <mat-error *ngIf="productForm.get('price').hasError('required')">Sie müssen einen Preis eingeben.</mat-error>
       </mat-form-field>
     </form>
-
+    <br>
     <div class="content_flex_end">
-      <button mat-raised-button color="primary" (click)="addProduct(name.value, price.value, description.value)">
+      <button mat-raised-button color="primary" [disabled]="productForm.invalid"
+        (click)="addProduct(productForm.get('name').value, productForm.get('price').value, productForm.get('description').value)">
         Produkt hinzufügen</button>
     </div>
   </mat-card>

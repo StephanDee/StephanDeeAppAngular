@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/co
 import { ProductManagerService } from './managers/product-manager.service';
 import { Product } from './models/product';
 import { Subscription } from 'rxjs';
-import { FormControl, NgModel } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 /**
  * The AppComponent the root component of the app.
@@ -19,10 +19,8 @@ import { FormControl, NgModel } from '@angular/forms';
   providers: [ProductManagerService]
 })
 export class AppComponent implements OnInit, OnDestroy {
-  @ViewChild('name', { static: false }) name: NgModel;
-  @ViewChild('description', { static: false }) description: NgModel;
-  @ViewChild('price', { static: false }) price: NgModel;
 
+  public productForm: FormGroup;
   private getProductsSubscription: Subscription;
   public products: Product[] = [];
 
@@ -31,13 +29,17 @@ export class AppComponent implements OnInit, OnDestroy {
    *
    * @param productManagerService This service handles all operations and methods for products.
    */
-  constructor(public productManagerService: ProductManagerService) {
+  constructor(
+    public productManagerService: ProductManagerService,
+    public formBuilder: FormBuilder
+  ) {
   }
 
   /**
    * Initialize the AppComponent.
    */
   public ngOnInit(): void {
+    this.initForm();
     this.getProductsSubscription = this.productManagerService.getProducts().subscribe((productData: Product[]) => {
       this.products = productData;
     });
@@ -49,6 +51,14 @@ export class AppComponent implements OnInit, OnDestroy {
   public ngOnDestroy(): void {
     // unsubscribe Subscriptions
     this.getProductsSubscription.unsubscribe();
+  }
+
+  public initForm() {
+    this.productForm = this.formBuilder.group({
+      'name': ['', [Validators.required, Validators.maxLength(30)]],
+      'description': ['', Validators.maxLength(255)],
+      'price': ['', Validators.required]
+    });
   }
 
   /**
@@ -74,9 +84,9 @@ export class AppComponent implements OnInit, OnDestroy {
       this.products.push(newProduct);
 
       // resets the inputs
-      this.name.reset('');
-      this.description.reset('');
-      this.price.reset('');
+      this.productForm.get('name').reset();
+      this.productForm.get('description').reset();
+      this.productForm.get('price').reset();
     } else {
       alert('Bitte füllen Sie alle mit dem * gekennzeichneten Felder aus.');
     }
