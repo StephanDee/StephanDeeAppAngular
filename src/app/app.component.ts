@@ -3,6 +3,8 @@ import { ProductManagerService } from './managers/product-manager.service';
 import { Product } from './models/product';
 import { Subscription } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ProductDialogComponent } from './product-dialog/product-dialog.component';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 /**
  * The AppComponent the root component of the app.
@@ -10,7 +12,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
  * @Author: Stephan Dünkel 
  * @Date: 2019-06-11 13:52:51 
  * @Last Modified by: Stephan Dünkel
- * @Last Modified time: 2019-06-11 14:18:52
+ * @Last Modified time: 2019-06-16 21:45:27
  */
 @Component({
   selector: 'app-root',
@@ -27,11 +29,14 @@ export class AppComponent implements OnInit, OnDestroy {
   /**
    * The constructor of AppComponent.
    *
-   * @param productManagerService This service handles all operations and methods for products.
+   * @param productService This service handles all operations and methods for products
+   * @param formBuilder This is used to create formGroup with validations
+   * @param dialog This is used to create a dialog
    */
   constructor(
-    public productManagerService: ProductManagerService,
-    public formBuilder: FormBuilder
+    public productService: ProductManagerService,
+    public formBuilder: FormBuilder,
+    public dialog: MatDialog
   ) {
   }
 
@@ -40,24 +45,53 @@ export class AppComponent implements OnInit, OnDestroy {
    */
   public ngOnInit(): void {
     this.initForm();
-    this.getProductsSubscription = this.productManagerService.getProducts().subscribe((productData: Product[]) => {
+    this.getProductsSubscription = this.productService.getProducts().subscribe((productData: Product[]) => {
       this.products = productData;
     });
   }
 
   /**
    * When the AppComponent is left.
+   * Unsubscribes all Subscriptions.
    */
   public ngOnDestroy(): void {
     // unsubscribe Subscriptions
     this.getProductsSubscription.unsubscribe();
   }
 
-  public initForm() {
+  /**
+   * Initialize the form.
+   */
+  public initForm(): void {
     this.productForm = this.formBuilder.group({
       'name': ['', [Validators.required, Validators.maxLength(30)]],
       'description': ['', Validators.maxLength(255)],
       'price': ['', Validators.required]
+    });
+  }
+
+  /**
+   * Opens the product dialog.
+   *
+   * @param id the _id of the product
+   */
+  public openProductDialog(id: string): void {
+    const dialogRef: MatDialogRef<ProductDialogComponent> = this.dialog.open(ProductDialogComponent, {
+      width: "532px",
+      data: {
+        productId: id
+      },
+      autoFocus: false
+    });
+    dialogRef.afterClosed().toPromise().then((productData: Product) => {
+      if (productData) {
+        const index = this.products.findIndex((product) => product._id === productData._id);
+        if (index > -1) {
+          if (this.products[index].__v !== productData.__v) {
+            this.products.splice(index, 1, productData);
+          }
+        }
+      }
     });
   }
 
@@ -80,7 +114,7 @@ export class AppComponent implements OnInit, OnDestroy {
         product.description = description;
       }
 
-      const newProduct: Product = await this.productManagerService.createProduct(product);
+      const newProduct: Product = await this.productService.createProduct(product);
       this.products.push(newProduct);
 
       // resets the inputs
@@ -98,7 +132,7 @@ export class AppComponent implements OnInit, OnDestroy {
    * @param id the product ID
    */
   public async deleteProduct(id: string): Promise<void> {
-    await this.productManagerService.removeProduct(id);
+    await this.productService.removeProduct(id);
 
     // remove product from List
     const index = this.products.findIndex((product) => product._id === id);

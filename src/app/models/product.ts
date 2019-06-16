@@ -4,7 +4,7 @@
  * @Author: Stephan Dünkel 
  * @Date: 2019-06-11 13:53:53 
  * @Last Modified by: Stephan Dünkel
- * @Last Modified time: 2019-06-11 13:56:02
+ * @Last Modified time: 2019-06-16 17:43:46
  */
 export class Product {
 
@@ -12,6 +12,8 @@ export class Product {
     public readonly _id: string;
     // the released/modified date
     public readonly date: Date;
+    // the product version
+    public readonly __v: number;
 
     /**
      * The constructor of the product model.

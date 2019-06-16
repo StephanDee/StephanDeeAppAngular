@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
  * @Author: Stephan Dünkel 
  * @Date: 2019-06-11 13:53:35 
  * @Last Modified by: Stephan Dünkel
- * @Last Modified time: 2019-06-11 14:18:35
+ * @Last Modified time: 2019-06-16 17:20:41
  */
 @Injectable()
 export class ProductAccessService {
@@ -61,6 +61,26 @@ export class ProductAccessService {
 
             return await this.http.post<Product>(
                 `${this.apiUrl}${this.routeProducts}`,
+                product,
+                { headers: headers }
+            ).toPromise();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    /**
+     * Update or create a product.
+     *
+     * @param product The product
+     */
+    public async updateProduct(product: Product): Promise<Product> {
+        try {
+            let headers = new HttpHeaders();
+            headers.append('Content-Type', 'application/json');
+
+            return await this.http.put<Product>(
+                `${this.apiUrl}${this.routeProducts}/${product._id}`,
                 product,
                 { headers: headers }
             ).toPromise();

@@ -1,0 +1,46 @@
+<div class="form_width spacer_1">
+  <div class="content_flex_start">
+    <button mat-mini-fab aria-label="Close" class="back_button" (click)="closeDialog(product)" color="accent">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+    <h1>{{ product?.name }}</h1>
+  </div>
+
+  <form [formGroup]="productDialogForm">
+    <mat-form-field class="full_width">
+      <input matInput type="text" name="name" placeholder="Name" maxLength="30" formControlName="name">
+      <button *ngIf="productDialogForm.get('name').value" mat-button matSuffix mat-icon-button aria-label="Clear"
+        (click)="productDialogForm.get('name').setValue('')">
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-hint align="end">{{ productDialogForm.get('name').value?.length }} / 30</mat-hint>
+      <mat-error *ngIf="productDialogForm.get('name').hasError('required')">Sie müssen einen Namen eingeben.</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full_width">
+      <button *ngIf="productDialogForm.get('description').value" mat-button matSuffix mat-icon-button aria-label="Clear"
+        (click)="productDialogForm.get('description').setValue('')">
+        <mat-icon>close</mat-icon>
+      </button>
+      <textarea matInput type="text" name="description" placeholder="Beschreibung" maxLength="255" rows="8"
+        formControlName="description"></textarea>
+      <mat-hint align="end">{{ productDialogForm.get('description').value?.length }} / 255</mat-hint>
+    </mat-form-field>
+    <mat-form-field class="full_width">
+      <input matInput type="number" name="price" placeholder="Preis" maxLength="10" formControlName="price">
+      <button *ngIf="productDialogForm.get('price').value" mat-button matSuffix mat-icon-button aria-label="Clear"
+        (click)="productDialogForm.get('price').setValue('')">
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-error *ngIf="productDialogForm.get('price').hasError('required')">Sie müssen einen Preis eingeben.
+      </mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<br>
+
+<div class="content_flex_end">
+  <button mat-button (click)="resetForm(product)">Reset</button>
+  <button mat-raised-button color="primary" [disabled]="productDialogForm.invalid || productDialogForm.pristine"
+    (click)="updateProduct(product, productDialogForm.value)">
+    Änderungen speichern</button>
+</div>

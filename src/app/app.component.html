@@ -29,7 +29,6 @@
           (click)="productForm.get('price').setValue('')">
           <mat-icon>close</mat-icon>
         </button>
-        <mat-hint align="end">{{ productForm.get('price').value?.length }} / 10</mat-hint>
         <mat-error *ngIf="productForm.get('price').hasError('required')">Sie müssen einen Preis eingeben.</mat-error>
       </mat-form-field>
     </form>
@@ -46,9 +45,14 @@
     <mat-card class="form_width spacer_1">
       <div class="content_space_between">
         <p>{{ product.name }}</p>
-        <button mat-mini-fab color="accent" aria-label="icon-button clear" (click)="deleteProduct(product._id)">
-          <mat-icon>clear</mat-icon>
-        </button>
+        <div class="content_flex_end">
+          <button class="space_right_1" mat-mini-fab color="primary" aria-label="icon-button clear" (click)="openProductDialog(product._id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-mini-fab color="accent" aria-label="icon-button clear" (click)="deleteProduct(product._id)">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </div>
       </div>
       <h4>Beschreibung</h4>
       <p>{{ product.description }}</p>

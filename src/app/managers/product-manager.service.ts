@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
  * @Author: Stephan Dünkel 
  * @Date: 2019-06-11 13:53:53 
  * @Last Modified by: Stephan Dünkel
- * @Last Modified time: 2019-06-11 13:56:02
+ * @Last Modified time: 2019-06-16 16:58:40
  */
 @Injectable()
 export class ProductManagerService {
@@ -43,6 +43,15 @@ export class ProductManagerService {
      */
     public async createProduct(product: Product): Promise<Product> {
         return await this.productAccessService.createProduct(product);
+    }
+
+    /**
+     * Update or create a product.
+     *
+     * @param id The product
+     */
+    public async updateProduct(product: Product): Promise<Product> {
+        return await this.productAccessService.updateProduct(product);
     }
 
     /**

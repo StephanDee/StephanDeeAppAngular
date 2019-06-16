@@ -10,3 +10,27 @@
 
 html, body { height: 100%; background: #232526;  /* fallback for old browsers */ background: -webkit-linear-gradient(to right, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */ background: linear-gradient(to right, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.form_width {
+    max-width: 500px;
+    width: 100%;
+}
+  
+.full_width {
+    width: 100%;
+}
+
+.content_space_between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.content_flex_end {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.content_flex_start {
+    display: flex;
+    justify-content: flex-start;
+}

@@ -27,6 +27,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { ProductManagerService } from './managers/product-manager.service';
 import { ProductAccessService } from './dbaccess/product-access.service';
+import { ProductDialogComponent } from './product-dialog/product-dialog.component';
 
 // import { environment } from '../environments/environment';
 
@@ -36,11 +37,12 @@ import { ProductAccessService } from './dbaccess/product-access.service';
  * @Author: Stephan Dünkel 
  * @Date: 2019-06-10 00:15:37 
  * @Last Modified by: Stephan Dünkel
- * @Last Modified time: 2019-06-10 00:16:32
+ * @Last Modified time: 2019-06-16 15:39:13
  */
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProductDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -65,6 +67,10 @@ import { ProductAccessService } from './dbaccess/product-access.service';
     MatIconModule,
     MatCardModule,
     MatButtonModule
+  ],
+  entryComponents: [
+    AppComponent,
+    ProductDialogComponent
   ],
   providers: [ProductManagerService, ProductAccessService],
   bootstrap: [AppComponent]
