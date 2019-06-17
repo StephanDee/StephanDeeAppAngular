@@ -1,7 +1,7 @@
-# StephanDeeApp
+# StephanDeeAppWeb
 
 ## Description
-My Frontend - Application
+My Frontend - Web Application
 
 ## Version
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.1.

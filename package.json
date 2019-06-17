@@ -1,6 +1,6 @@
 {
-  "name": "stephan-dee-app",
-  "version": "0.0.1-alpha",
+  "name": "stephan-dee-app-web",
+  "version": "0.0.2-alpha",
   "author": "Stephan Dünkel",
   "license": "MIT",
   "scripts": {
