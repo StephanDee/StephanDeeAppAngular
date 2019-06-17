@@ -1,6 +1,4 @@
-$textcolor_darkbg: #ffffff;
-$element_center_width: 548px;
-$mat_space_1: 8px;
+@import './res/variables';
 
 textarea {
   resize: none !important;
