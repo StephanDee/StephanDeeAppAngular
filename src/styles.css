@@ -23,27 +23,28 @@ html body {
   width: 100%;
 }
 
-.content_space_between,
-.content_flex_end,
-.content_flex_start {
+.content_space_between {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-}
-
-.content_space_between {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
 }
 
 .content_flex_end {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
 }
 
 .content_flex_start {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;

@@ -13,6 +13,11 @@
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+@mixin justifyContentType($type) {
+  display: flex;
+  justify-content: $type;
+}
+
 html {
   height: 100%;
   @include bodyBackgroundColor();
@@ -31,20 +36,14 @@ html {
   width: 100%;
 }
 
-.content_space_between,
-.content_flex_end,
-.content_flex_start {
-  display: flex;
-}
-
 .content_space_between {
-  justify-content: space-between;
+  @include justifyContentType(space-between);
 }
 
 .content_flex_end {
-  justify-content: flex-end;
+  @include justifyContentType(flex-end);
 }
 
 .content_flex_start {
-  justify-content: flex-start;
+  @include justifyContentType(flex-start);
 }
