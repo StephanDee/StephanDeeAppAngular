@@ -1,36 +1,50 @@
 /* You can add global styles to this file, and also import other style files */
+@mixin bodyBackgroundColor {
+  background: #232526; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #414345,
+    #232526
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #414345,
+    #232526
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
 
-    // background: #EC6F66;  /* fallback for old browsers */
-    // background: -webkit-linear-gradient(to right, #F3A183, #EC6F66);  /* Chrome 10-25, Safari 5.1-6 */
-    // background: linear-gradient(to right, #F3A183, #EC6F66); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-    // background: #ddd6f3;  /* fallback for old browsers */
-    // background: -webkit-linear-gradient(to right, #faaca8, #ddd6f3);  /* Chrome 10-25, Safari 5.1-6 */
-    // background: linear-gradient(to right, #faaca8, #ddd6f3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-html, body { height: 100%; background: #232526;  /* fallback for old browsers */ background: -webkit-linear-gradient(to right, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */ background: linear-gradient(to right, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html {
+  height: 100%;
+  @include bodyBackgroundColor();
+  body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+  }
+}
 
 .form_width {
-    max-width: 500px;
-    width: 100%;
+  max-width: 500px;
+  width: 100%;
 }
-  
+
 .full_width {
-    width: 100%;
+  width: 100%;
+}
+
+.content_space_between,
+.content_flex_end,
+.content_flex_start {
+  display: flex;
 }
 
 .content_space_between {
-    display: flex;
-    justify-content: space-between;
+  justify-content: space-between;
 }
 
 .content_flex_end {
-    display: flex;
-    justify-content: flex-end;
+  justify-content: flex-end;
 }
 
 .content_flex_start {
-    display: flex;
-    justify-content: flex-start;
+  justify-content: flex-start;
 }

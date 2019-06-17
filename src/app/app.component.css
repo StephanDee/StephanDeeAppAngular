@@ -1,17 +1,13 @@
-$textcolor_darkbg: #ffffff;
-$element_center_width: 548px;
-$mat_space_1: 8px;
-
 textarea {
   resize: none !important;
 }
 
 .spacer_1 {
-  margin: $mat_space_1;
+  margin: 8px;
 }
 
 .space_right_1 {
-  margin-right: $mat_space_1;
+  margin-right: 8px;
 }
 
 .text_center {
@@ -19,17 +15,18 @@ textarea {
 }
 
 .text_white {
-  color: $textcolor_darkbg;
+  color: #ffffff;
 }
 
 .element_center {
-  max-width: $element_center_width;
+  max-width: 548px;
   margin: auto;
 }
 
 @media screen and (max-width: 667px) {
   .element_center {
-    max-width: $element_center_width;
+    max-width: 548px;
     margin-right: 50px;
   }
 }
+/*# sourceMappingURL=app.component.css.map */
