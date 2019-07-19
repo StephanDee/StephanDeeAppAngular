@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import '../../res/variables';
+
 @mixin bodyBackgroundColor {
   background: #232526; /* fallback for old browsers */
   background: -webkit-linear-gradient(
@@ -46,4 +48,24 @@ html {
 
 .content_flex_start {
   @include justifyContentType(flex-start);
+}
+
+textarea {
+  resize: none !important;
+}
+
+.spacer_1 {
+  margin: $mat_space_1;
+}
+
+.space_right_1 {
+  margin-right: $mat_space_1;
+}
+
+.text_center {
+  text-align: center;
+}
+
+.text_white {
+  color: $textcolor_darkbg;
 }
