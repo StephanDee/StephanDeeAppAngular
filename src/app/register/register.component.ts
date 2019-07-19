@@ -1,12 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
 
   public registerForm: FormGroup;
 
@@ -48,8 +49,7 @@ export class RegisterComponent implements OnInit {
    * @param password the user password
    */
   public onSubmitButtonClicked(name, firstname, lastname, email, password): void {
-    // do something
-    console.log('registered with name: ' + name + ' email: ' + firstname +
-      ' firstname: ' + lastname + ' lastname: ' + email + ' and password: ' + password);
+    const user = new User(name, firstname, lastname, email, password);
+    console.log(user);
   }
 }

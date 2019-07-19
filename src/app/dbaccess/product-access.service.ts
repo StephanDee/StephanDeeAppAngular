@@ -2,19 +2,19 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { Product } from '../models/product';
 import { Injectable } from '@angular/core';
+import { BaseStephanDeeCloudAccessService } from './base-stephandeecloud-access.service';
 
 /**
  * The ProductAccessService is the REST API connection to the StephanDeeCloud with all the CRUD Operations.
  *
- * @Author: Stephan Dünkel 
- * @Date: 2019-06-11 13:53:35 
+ * @Author: Stephan Dünkel
+ * @Date: 2019-06-11 13:53:35
  * @Last Modified by: Stephan Dünkel
- * @Last Modified time: 2019-06-16 17:20:41
+ * @Last Modified time: 2019-07-19 23:40:22
  */
 @Injectable()
-export class ProductAccessService {
-    private apiUrl = "http://localhost:3000";
-    private routeProducts = "/products";
+export class ProductAccessService extends BaseStephanDeeCloudAccessService {
+    private routeProducts = '/products';
 
     /**
      * The constructor of ProductAccessService.
@@ -22,6 +22,7 @@ export class ProductAccessService {
      * @param http The http client.
      */
     constructor(private http: HttpClient) {
+      super();
     }
 
     /**
