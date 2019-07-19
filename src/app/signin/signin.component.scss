@@ -1,0 +1,33 @@
+@import '../../res/variables';
+
+textarea {
+  resize: none !important;
+}
+
+.spacer_1 {
+  margin: $mat_space_1;
+}
+
+.space_right_1 {
+  margin-right: $mat_space_1;
+}
+
+.text_center {
+  text-align: center;
+}
+
+.text_white {
+  color: $textcolor_darkbg;
+}
+
+.element_center {
+  max-width: $element_center_width;
+  margin: auto;
+}
+
+@media screen and (max-width: 667px) {
+  .element_center {
+    max-width: $element_center_width;
+    margin-right: 50px;
+  }
+}

@@ -1,0 +1,12 @@
+<div class="element_center">
+  <mat-card class="form_width spacer_1">
+    <mat-tab-group mat-stretch-tabs>
+      <mat-tab label="Anmelden">
+        <app-login (userIsLoggedIn)="onUserIsLoggedIn($event)"></app-login>
+      </mat-tab>
+      <mat-tab label="Registrieren">
+        <app-register></app-register>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>

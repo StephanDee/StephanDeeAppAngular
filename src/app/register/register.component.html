@@ -1,0 +1,64 @@
+<form [formGroup]="registerForm">
+
+  <mat-form-field class="full_width">
+    <input matInput type="text" name="name" placeholder="Name" maxLength="255" formControlName="name">
+    <button *ngIf="registerForm.get('name').value" mat-button matSuffix mat-icon-button aria-label="Clear"
+      (click)="registerForm.get('name').setValue('')">
+      <mat-icon>close</mat-icon>
+    </button>
+    <mat-hint align="end">{{ registerForm.get('name').value?.length }} / 255</mat-hint>
+    <mat-error *ngIf="registerForm.get('name').hasError('required')">Sie müssen einen Namen eingeben.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full_width">
+    <input matInput type="text" name="firstname" placeholder="Vorname" maxLength="255" formControlName="firstname">
+    <button *ngIf="registerForm.get('firstname').value" mat-button matSuffix mat-icon-button aria-label="Clear"
+      (click)="registerForm.get('firstname').setValue('')">
+      <mat-icon>close</mat-icon>
+    </button>
+    <mat-hint align="end">{{ registerForm.get('firstname').value?.length }} / 255</mat-hint>
+    <mat-error *ngIf="registerForm.get('firstname').hasError('required')">Sie müssen einen Namen eingeben.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full_width">
+    <input matInput type="text" name="lastname" placeholder="Nachname" maxLength="255" formControlName="lastname">
+    <button *ngIf="registerForm.get('lastname').value" mat-button matSuffix mat-icon-button aria-label="Clear"
+      (click)="registerForm.get('lastname').setValue('')">
+      <mat-icon>close</mat-icon>
+    </button>
+    <mat-hint align="end">{{ registerForm.get('lastname').value?.length }} / 255</mat-hint>
+    <mat-error *ngIf="registerForm.get('lastname').hasError('required')">Sie müssen einen Namen eingeben.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full_width">
+    <input matInput type="text" name="email" placeholder="E-Mail-Adresse" maxLength="30" formControlName="email">
+    <button *ngIf="registerForm.get('email').value" mat-button matSuffix mat-icon-button aria-label="Clear"
+      (click)="registerForm.get('email').setValue('')">
+      <mat-icon>close</mat-icon>
+    </button>
+    <mat-hint align="end">{{ registerForm.get('email').value?.length }} / 255</mat-hint>
+    <mat-error *ngIf="registerForm.get('email').hasError('required')">Sie müssen einen Namen eingeben.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full_width">
+    <input matInput type="password" name="password" placeholder="Passwort" maxLength="2048" formControlName="password">
+    <button *ngIf="registerForm.get('password').value" mat-button matSuffix mat-icon-button aria-label="Clear"
+      (click)="registerForm.get('password').setValue('')">
+      <mat-icon>close</mat-icon>
+    </button>
+    <mat-hint align="end">{{ registerForm.get('email').value?.length }} / 2048</mat-hint>
+    <mat-error *ngIf="registerForm.get('password').hasError('required')">Sie müssen eine Namen eingeben.</mat-error>
+  </mat-form-field>
+</form>
+<br>
+<div class="content_flex_end">
+  <button mat-raised-button color="primary" [disabled]="registerForm.invalid" (click)="onSubmitButtonClicked(
+          registerForm.get('name').value,
+          registerForm.get('firstname').value,
+          registerForm.get('lastname').value,
+          registerForm.get('email').value,
+          registerForm.get('password').value)">
+    Registrieren</button>
+</div>

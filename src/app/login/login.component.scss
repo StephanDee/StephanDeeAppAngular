@@ -1,0 +1,21 @@
+@import '../../res/variables';
+
+textarea {
+  resize: none !important;
+}
+
+.spacer_1 {
+  margin: $mat_space_1;
+}
+
+.space_right_1 {
+  margin-right: $mat_space_1;
+}
+
+.text_center {
+  text-align: center;
+}
+
+.text_white {
+  color: $textcolor_darkbg;
+}

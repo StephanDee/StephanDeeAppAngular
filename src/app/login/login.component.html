@@ -1,0 +1,26 @@
+<form [formGroup]="loginForm">
+  <mat-form-field class="full_width">
+    <input matInput type="text" name="email" placeholder="E-Mail-Adresse" maxLength="30" formControlName="email">
+    <button *ngIf="loginForm.get('email').value" mat-button matSuffix mat-icon-button aria-label="Clear"
+      (click)="loginForm.get('email').setValue('')">
+      <mat-icon>close</mat-icon>
+    </button>
+    <mat-hint align="end">{{ loginForm.get('email').value?.length }} / 255</mat-hint>
+    <mat-error *ngIf="loginForm.get('email').hasError('required')">Sie müssen eine Namen eingeben.</mat-error>
+  </mat-form-field>
+  <mat-form-field class="full_width">
+    <input matInput type="password" name="password" placeholder="Passwort" maxLength="2048" formControlName="password">
+    <button *ngIf="loginForm.get('password').value" mat-button matSuffix mat-icon-button aria-label="Clear"
+      (click)="loginForm.get('password').setValue('')">
+      <mat-icon>close</mat-icon>
+    </button>
+    <mat-hint align="end">{{ loginForm.get('email').value?.length }} / 2048</mat-hint>
+    <mat-error *ngIf="loginForm.get('password').hasError('required')">Sie müssen eine Namen eingeben.</mat-error>
+  </mat-form-field>
+</form>
+<br>
+<div class="content_flex_end">
+  <button mat-raised-button color="primary" [disabled]="loginForm.invalid"
+    (click)="onSubmitButtonClicked(loginForm.get('email').value, loginForm.get('password').value)">
+    Anmelden</button>
+</div>

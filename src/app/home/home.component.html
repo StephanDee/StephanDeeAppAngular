@@ -1,0 +1,65 @@
+<div class="text_center">
+  <h1 class="text_white">Produkte</h1>
+</div>
+
+<div class="element_center">
+  <mat-card class="form_width spacer_1">
+    <form [formGroup]="productForm">
+      <mat-form-field class="full_width">
+        <input matInput type="text" name="name" placeholder="Name" maxLength="30" formControlName="name">
+        <button *ngIf="productForm.get('name').value" mat-button matSuffix mat-icon-button aria-label="Clear"
+          (click)="productForm.get('name').setValue('')">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-hint align="end">{{ productForm.get('name').value?.length }} / 30</mat-hint>
+        <mat-error *ngIf="productForm.get('name').hasError('required')">Sie müssen einen Namen eingeben.</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full_width">
+        <button *ngIf="productForm.get('description').value" mat-button matSuffix mat-icon-button aria-label="Clear"
+          (click)="productForm.get('description').setValue('')">
+          <mat-icon>close</mat-icon>
+        </button>
+        <textarea matInput type="text" name="description" placeholder="Beschreibung" maxLength="255" rows="8"
+          formControlName="description"></textarea>
+        <mat-hint align="end">{{ productForm.get('description').value?.length }} / 255</mat-hint>
+      </mat-form-field>
+      <mat-form-field class="full_width">
+        <input matInput type="number" name="price" placeholder="Preis" maxLength="10" formControlName="price">
+        <button *ngIf="productForm.get('price').value" mat-button matSuffix mat-icon-button aria-label="Clear"
+          (click)="productForm.get('price').setValue('')">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error *ngIf="productForm.get('price').hasError('required')">Sie müssen einen Preis eingeben.</mat-error>
+      </mat-form-field>
+    </form>
+    <br>
+    <div class="content_flex_end">
+      <button mat-raised-button color="primary" [disabled]="productForm.invalid"
+        (click)="addProduct(productForm.get('name').value, productForm.get('price').value, productForm.get('description').value)">
+        Produkt hinzufügen</button>
+    </div>
+  </mat-card>
+
+  <br><br>
+  <mat-list *ngFor="let product of products;">
+    <mat-card class="form_width spacer_1">
+      <div class="content_space_between">
+        <p>{{ product.name }}</p>
+        <div class="content_flex_end">
+          <button class="space_right_1" mat-mini-fab color="primary" aria-label="icon-button clear" (click)="openProductDialog(product._id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-mini-fab color="accent" aria-label="icon-button clear" (click)="deleteProduct(product._id)">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </div>
+      </div>
+      <h4>Beschreibung</h4>
+      <p>{{ product.description }}</p>
+      <div class="content_flex_end">
+        <p>Preis {{ product.price }} €</p>
+      </div>
+    </mat-card>
+  </mat-list>
+</div>
+<br>
