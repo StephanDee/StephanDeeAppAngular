@@ -6,8 +6,8 @@ import { Injectable } from '@angular/core';
 /**
  * The ProductManagerService handles all CRUD Operations and Methods for Products.
  *
- * @Author: Stephan Dünkel 
- * @Date: 2019-06-11 13:53:53 
+ * @Author: Stephan Dünkel
+ * @Date: 2019-06-11 13:53:53
  * @Last Modified by: Stephan Dünkel
  * @Last Modified time: 2019-06-16 16:58:40
  */
@@ -23,8 +23,8 @@ export class ProductManagerService {
     /**
      * Get all products.
      */
-    public getProducts(): Observable<Product[]> {
-        return this.productAccessService.getProducts();
+    public getProducts(token: string): Observable<Product[]> {
+        return this.productAccessService.getProducts(token);
     }
 
     /**

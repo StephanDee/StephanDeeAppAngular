@@ -51,8 +51,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   public async onSubmitButtonClicked(email, password): Promise<void> {
     const authToken = await this.authAccessService.login(email, password);
     if (authToken) {
-      console.log('onSubmitButtonClicked: authToken: ', authToken);
-      console.log(localStorage.getItem('auth-token'));
       this.userIsLoggedIn.emit(true);
     }
   }

@@ -1,3 +1,4 @@
+import { AuthAccessService } from './../dbaccess/auth-access.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductManagerService } from '../managers/product-manager.service';
 import { Product } from '../models/product';
@@ -18,7 +19,7 @@ import { MatDialog, MatDialogRef } from '@angular/material';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  providers: [ProductManagerService]
+  providers: []
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
@@ -35,6 +36,7 @@ export class HomeComponent implements OnInit, OnDestroy {
    */
   constructor(
     public productService: ProductManagerService,
+    public authAccessService: AuthAccessService,
     public formBuilder: FormBuilder,
     public dialog: MatDialog
   ) {
@@ -43,9 +45,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   /**
    * Initialize the AppComponent.
    */
-  public ngOnInit(): void {
+  public async ngOnInit(): Promise<void> {
     this.initForm();
-    this.getProductsSubscription = this.productService.getProducts().subscribe((productData: Product[]) => {
+    const token = await this.authAccessService.getToken();
+    this.getProductsSubscription = this.productService.getProducts(token).subscribe((productData: Product[]) => {
       this.products = productData;
     });
   }

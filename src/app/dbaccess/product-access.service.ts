@@ -28,9 +28,13 @@ export class ProductAccessService extends BaseStephanDeeCloudAccessService {
   /**
    * Get all products.
    */
-  public getProducts(): Observable<Product[]> {
+  public getProducts(token: string): Observable<Product[]> {
     try {
-      return this.http.get<Product[]>(`${this.apiUrl}${this.routeProducts}`);
+      return this.http.get<Product[]>(`${this.apiUrl}${this.routeProducts}`, {
+        headers: new HttpHeaders()
+        .append('Content-Type', 'application/json')
+        .append('Accept', 'application/json')
+        .append('auth-token', token)});
     } catch (error) {
       console.log(error);
     }
