@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import '../../res/variables';
+@import './res/variables';
 
 @mixin bodyBackgroundColor {
   background: #232526; /* fallback for old browsers */

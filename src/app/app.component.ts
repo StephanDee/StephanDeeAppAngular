@@ -1,3 +1,4 @@
+import { AuthAccessService } from './dbaccess/auth-access.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 /**
@@ -21,14 +22,14 @@ export class AppComponent implements OnInit, OnDestroy {
   /**
    * The constructor of AppComponent.
    */
-  constructor(
-  ) {
+  constructor(public authAccessService: AuthAccessService) {
   }
 
   /**
    * Initialize the AppComponent.
    */
   public ngOnInit(): void {
+    console.log(this.authAccessService.getToken());
   }
 
   /**

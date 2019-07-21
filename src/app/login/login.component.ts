@@ -1,3 +1,4 @@
+import { AuthAccessService } from '../dbaccess/auth-access.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 
@@ -13,7 +14,10 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   public loginForm: FormGroup;
 
-  constructor(public formBuilder: FormBuilder) { }
+  constructor(
+    public formBuilder: FormBuilder,
+    public authAccessService: AuthAccessService
+  ) { }
 
   /**
    * When Component initialized.
@@ -44,8 +48,12 @@ export class LoginComponent implements OnInit, OnDestroy {
    * @param email the user email
    * @param password the user password
    */
-  public onSubmitButtonClicked(email, password): void {
-    this.userIsLoggedIn.emit(true);
-    console.log('logged in with email: ' + email + ' and password: ' + password);
+  public async onSubmitButtonClicked(email, password): Promise<void> {
+    const authToken = await this.authAccessService.login(email, password);
+    if (authToken) {
+      console.log('onSubmitButtonClicked: authToken: ', authToken);
+      console.log(localStorage.getItem('auth-token'));
+      this.userIsLoggedIn.emit(true);
+    }
   }
 }

@@ -1,3 +1,4 @@
+import { AuthAccessService } from '../dbaccess/auth-access.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -68,7 +69,7 @@ import { MatButtonModule } from '@angular/material/button';
   entryComponents: [
     LoginComponent
   ],
-  providers: [],
+  providers: [AuthAccessService],
   bootstrap: [LoginComponent]
 })
 export class LoginModule { }

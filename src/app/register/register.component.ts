@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../models/user';
+import { AuthAccessService } from '../dbaccess/auth-access.service';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   public registerForm: FormGroup;
 
-  constructor(public formBuilder: FormBuilder) { }
+  constructor(public formBuilder: FormBuilder,
+              public authAccessService: AuthAccessService) {
+              }
 
   /**
    * When Component initialized.
@@ -40,7 +43,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Login if verifycation succeded.
+   * Register if verifycation succeded.
    *
    * @param name the user name
    * @param firstname the user firstname
@@ -48,8 +51,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
    * @param email the user email
    * @param password the user password
    */
-  public onSubmitButtonClicked(name, firstname, lastname, email, password): void {
+  public async onSubmitButtonClicked(name, firstname, lastname, email, password): Promise<void> {
     const user = new User(name, firstname, lastname, email, password);
-    console.log(user);
+    await this.authAccessService.registerUser(user);
   }
 }
