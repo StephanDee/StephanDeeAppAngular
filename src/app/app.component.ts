@@ -29,7 +29,10 @@ export class AppComponent implements OnInit, OnDestroy {
    * Initialize the AppComponent.
    */
   public ngOnInit(): void {
-    console.log(this.authAccessService.getToken());
+    if (this.authAccessService.getToken()) {
+      console.log(this.authAccessService.getToken());
+      this.userLoggedIn = true;
+    }
   }
 
   /**
@@ -39,7 +42,7 @@ export class AppComponent implements OnInit, OnDestroy {
   public ngOnDestroy(): void {
   }
 
-  onUserIsLoggedInEvent(event) {
+  public onUserIsLoggedInEvent(event): void {
     if (event) {
       this.userLoggedIn = true;
     }

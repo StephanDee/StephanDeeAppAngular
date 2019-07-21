@@ -7,11 +7,9 @@ import { LayoutModule } from '@angular/cdk/layout';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HomeModule } from './home/home.module';
+import { SigninModule } from './signin/signin.module';
 
 import { AppComponent } from './app.component';
-
-import { SigninComponent } from './signin/signin.component';
-import { SigninModule } from './signin/signin.module';
 
 // import { environment } from '../environments/environment';
 
