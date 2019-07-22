@@ -7,7 +7,7 @@ import { BaseStephanDeeCloudAccessService } from './base-stephandeecloud-access.
  * @Author: Stephan Dünkel
  * @Date: 2019-07-19 23:25:01
  * @Last Modified by: Stephan Dünkel
- * @Last Modified time: 2019-07-19 23:43:06
+ * @Last Modified time: 2019-07-22 13:09:00
  *
  * The AuthAccessService is the REST API connection to the StephanDeeCloud.
  */
@@ -49,7 +49,7 @@ export class AuthAccessService extends BaseStephanDeeCloudAccessService {
     }
   }
 
-  public async login(email, password): Promise<string> {
+  public async login(email, password): Promise<void> {
     try {
       const headers = new HttpHeaders();
       headers.append('Content-Type', 'application/json');
@@ -62,8 +62,6 @@ export class AuthAccessService extends BaseStephanDeeCloudAccessService {
       ).toPromise();
 
       this.saveAuthToken(token);
-
-      return token;
     } catch (error) {
       console.log(error);
     }
@@ -85,5 +83,9 @@ export class AuthAccessService extends BaseStephanDeeCloudAccessService {
   }
 
     return this.authToken;
+  }
+
+  public userIsLoggedIn(): boolean {
+    return !!this.getToken();
   }
 }

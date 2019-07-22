@@ -1,4 +1,3 @@
-import { AuthAccessService } from './dbaccess/auth-access.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 /**
@@ -7,7 +6,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
  * @Author: Stephan Dünkel
  * @Date: 2019-06-11 13:52:51
  * @Last Modified by: Stephan Dünkel
- * @Last Modified time: 2019-06-16 21:45:27
+ * @Last Modified time: 2019-07-22 13:49:09
  */
 @Component({
   selector: 'app-root',
@@ -17,22 +16,16 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 })
 export class AppComponent implements OnInit, OnDestroy {
 
-  public userLoggedIn = false;
-
   /**
    * The constructor of AppComponent.
    */
-  constructor(public authAccessService: AuthAccessService) {
+  constructor() {
   }
 
   /**
    * Initialize the AppComponent.
    */
   public ngOnInit(): void {
-    if (this.authAccessService.getToken()) {
-      console.log(this.authAccessService.getToken());
-      this.userLoggedIn = true;
-    }
   }
 
   /**
@@ -40,11 +33,5 @@ export class AppComponent implements OnInit, OnDestroy {
    * Unsubscribes all Subscriptions.
    */
   public ngOnDestroy(): void {
-  }
-
-  public onUserIsLoggedInEvent(event): void {
-    if (event) {
-      this.userLoggedIn = true;
-    }
   }
 }

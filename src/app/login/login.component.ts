@@ -1,6 +1,7 @@
+import { Router } from '@angular/router';
 import { AuthAccessService } from '../dbaccess/auth-access.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -9,12 +10,10 @@ import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/cor
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
-  @Output()
-  userIsLoggedIn: EventEmitter<boolean> = new EventEmitter<boolean>();
-
   public loginForm: FormGroup;
 
   constructor(
+    public router: Router,
     public formBuilder: FormBuilder,
     public authAccessService: AuthAccessService
   ) { }
@@ -49,9 +48,9 @@ export class LoginComponent implements OnInit, OnDestroy {
    * @param password the user password
    */
   public async onSubmitButtonClicked(email, password): Promise<void> {
-    const authToken = await this.authAccessService.login(email, password);
-    if (authToken) {
-      this.userIsLoggedIn.emit(true);
+    await this.authAccessService.login(email, password);
+    if (this.authAccessService.userIsLoggedIn) {
+      this.router.navigate(['/home']);
     }
   }
 }
