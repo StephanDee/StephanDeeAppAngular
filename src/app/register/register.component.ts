@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../models/user';
 import { AuthAccessService } from '../dbaccess/auth-access.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -12,9 +13,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   public registerForm: FormGroup;
 
-  constructor(public formBuilder: FormBuilder,
-              public authAccessService: AuthAccessService) {
-              }
+  constructor(
+    public formBuilder: FormBuilder,
+    public router: Router,
+    public authAccessService: AuthAccessService) {
+  }
 
   /**
    * When Component initialized.
@@ -54,5 +57,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   public async onSubmitButtonClicked(name, firstname, lastname, email, password): Promise<void> {
     const user = new User(name, firstname, lastname, email, password);
     await this.authAccessService.registerUser(user);
+    await this.authAccessService.login(email, password);
+    this.router.navigate(['/home']);
   }
 }
