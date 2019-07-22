@@ -1,0 +1,11 @@
+<div style="background-color: white; display:flex; justify-content: space-between">
+  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item disabled>
+      <mat-icon>person</mat-icon>
+      <span>Ausloggen</span>
+    </button>
+  </mat-menu>
+</div>

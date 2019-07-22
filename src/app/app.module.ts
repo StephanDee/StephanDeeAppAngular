@@ -10,6 +10,7 @@ import { HomeModule } from './home/home.module';
 import { SigninModule } from './signin/signin.module';
 
 import { AppComponent } from './app.component';
+import { HeaderModule } from './header/header.module';
 
 // import { environment } from '../environments/environment';
 
@@ -19,7 +20,7 @@ import { AppComponent } from './app.component';
  * @Author: Stephan Dünkel
  * @Date: 2019-06-10 00:15:37
  * @Last Modified by: Stephan Dünkel
- * @Last Modified time: 2019-07-18 19:00:33
+ * @Last Modified time: 2019-07-22 14:14:43
  */
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
     LayoutModule,
     AppRoutingModule,
+    HeaderModule,
     SigninModule,
     HomeModule
   ],
